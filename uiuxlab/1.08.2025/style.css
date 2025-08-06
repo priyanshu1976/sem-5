@@ -1,0 +1,62 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  position: relative;
+  background-color: blanchedalmond;
+  width: 100vw;
+  height: 100vh;
+}
+
+.image {
+  position: absolute;
+  display: block;
+  background-color: azure;
+}
+
+.heading {
+  text-align: center;
+  display: block;
+  font-size: 50px;
+  font-style: italic;
+  font-family: 'Courier New', Courier, monospace;
+  text-decoration: underline;
+  color: cadetblue;
+}
+
+.para {
+  position: absolute;
+  left: 260px;
+  top: 150px;
+}
+
+p {
+  /* font-weight: bold; */
+  font-style: italic;
+  /* text-decoration: underline; */
+  font-size: 22px;
+}
+
+section {
+  height: 230px;
+}
+
+.para2 {
+  position: absolute;
+  left: 300px;
+  top: 250px;
+}
+.paracon2 {
+  height: 150px;
+  padding-top: 30px;
+}
+
+a {
+  position: absolute;
+  left: 43%;
+  top: 44%;
+  color: black;
+  font-size: 30px;
+}
