@@ -3,171 +3,710 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CSS Selectors Demo</title>
+    <title>🌟 CSS3 Selectors: Complete Theory & Interactive Examples 🌟</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Fira+Sans:400,700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      /**********************************************************
-       *  1. Universal Selector - Selects EVERYTHING            *
-       **********************************************************/
-      * {
-        font-family: Arial, sans-serif;
+      body {
+        font-family: 'Fira Sans', Arial, sans-serif;
+        background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+        color: #222;
+        margin: 0;
+        padding: 0;
       }
-
-      /**********************************************************
-       *  2. Type Selector - Selects elements by tag name       *
-       **********************************************************/
+      header {
+        background: linear-gradient(90deg, #4f8cff 0%, #a0e7e5 100%);
+        color: #fff;
+        padding: 2.5rem 1rem 1.5rem 1rem;
+        text-align: center;
+        box-shadow: 0 2px 12px #0002;
+      }
+      main {
+        max-width: 900px;
+        margin: 2.5rem auto;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 6px 32px #0002;
+        padding: 2.5rem 2rem 2rem 2rem;
+      }
       h1 {
-        color: darkblue;
+        font-size: 2.5rem;
+        margin-bottom: 0.3rem;
+        letter-spacing: 1px;
       }
-
-      /**********************************************************
-       *  3. Class Selector - Selects elements with a class     *
-       **********************************************************/
+      h2 {
+        color: #4f8cff;
+        margin-top: 2.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+      }
+      .theory {
+        background: #eaf4ff;
+        border-left: 6px solid #4f8cff;
+        padding: 1.2rem 2rem;
+        margin-bottom: 2.5rem;
+        border-radius: 0 12px 12px 0;
+        font-size: 1.13rem;
+      }
+      .selector-block {
+        margin-bottom: 2.7rem;
+      }
+      .selector-block code,
+      .example code {
+        background: #f3f3f3;
+        color: #1a237e;
+        padding: 2px 7px;
+        border-radius: 4px;
+        font-size: 1.05em;
+      }
+      .example {
+        background: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 1.1rem 1.2rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .example .label {
+        font-weight: bold;
+        color: #4f8cff;
+        margin-right: 0.5em;
+      }
+      .check {
+        color: #2ecc40;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+      .cross {
+        color: #e74c3c;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+      .example-row {
+        margin-bottom: 0.5em;
+      }
+      /* Universal Selector */
+      * {
+        box-sizing: border-box;
+      }
+      /* Type Selector */
+      h1,
+      h2,
+      h3 {
+        font-family: 'Fira Sans', Arial, sans-serif;
+      }
+      /* Class Selector */
       .highlight {
-        background-color: yellow;
+        background-color: #fff9c4;
+        border-left: 4px solid #ffe082;
+        padding-left: 0.5em;
       }
-
-      /**********************************************************
-       *  4. ID Selector - Selects element with a specific ID   *
-       **********************************************************/
+      /* ID Selector */
       #special {
-        color: green;
+        color: #27ae60;
         font-weight: bold;
+        background: #eafaf1;
+        border-left: 4px solid #27ae60;
+        padding-left: 0.5em;
       }
-
-      /**********************************************************
-       !  5. Descendant Selector - Any element inside another   !
-       !  (red)                                                !
-       **********************************************************/
+      /* Descendant Selector */
       .container p {
-        color: red;
+        color: #e67e22;
       }
-
-      /**********************************************************
-       *  6. Child Selector - Only DIRECT children              *
-       **********************************************************/
+      /* Child Selector */
       .container > span {
-        color: purple;
+        color: #8e24aa;
         font-weight: bold;
       }
-
-      /**********************************************************
-       !  7. Adjacent Sibling Selector - Selects the NEXT elem  !
-       !  (red)                                                !
-       **********************************************************/
+      /* Adjacent Sibling Selector */
       h2 + p {
         font-style: italic;
-        color: brown;
+        color: #d35400;
       }
-
-      /**********************************************************
-       !  8. General Sibling Selector - Selects ALL next sibs   !
-       !  (red)                                                !
-       **********************************************************/
+      /* General Sibling Selector */
       h3 ~ p {
         text-decoration: underline;
+        color: #1976d2;
       }
-
-      /**********************************************************
-       *  9. Attribute Selector - Selects elements w/ attribute *
-       **********************************************************/
+      /* Attribute Selector */
       input[type='text'] {
-        border: 2px solid blue;
-        padding: 5px;
+        border: 2px solid #4f8cff;
+        background-color: #f0f8ff;
+        padding: 6px 10px;
+        border-radius: 4px;
       }
-
-      /**********************************************************
-       * 10. Pseudo-class Selector - Example: hover             *
-       **********************************************************/
+      input[required] {
+        border: 2px dashed #e74c3c;
+        background: #fff0f0;
+      }
+      /* Pseudo-class Selector */
       button:hover {
-        background-color: orange;
-        color: white;
+        background-color: #ff9800;
+        color: #fff;
         cursor: pointer;
+        box-shadow: 0 2px 8px #ff980033;
       }
-
-      /**********************************************************
-       * 11. Pseudo-element Selector - Example: first-letter    *
-       **********************************************************/
+      button:active {
+        background-color: #1976d2;
+        color: #fff;
+      }
+      a:visited {
+        color: #8e24aa;
+      }
+      input:focus {
+        outline: 2px solid #27ae60;
+        background: #eafaf1;
+      }
+      /* Pseudo-element Selector */
       p::first-letter {
-        /*
-        used for part of the element
-        first-line
-        first - letter
-        before
-        after marker
-        selection
-        */
         font-size: 1.5em;
         font-weight: bold;
+        color: #4f8cff;
       }
-      #active:active {
-        background-color: blue;
-        /* when we press on it or some activity is going on */
-        /* e
-        hover
-        active
-        focus
-        visited
-         */
+      p::selection {
+        background: #a0e7e5;
+        color: #222;
+      }
+      /* Attribute Selectors - Advanced */
+      [disabled] {
+        background-color: #ffd6d6;
+        border: 2px solid #e74c3c;
+      }
+      .featured-example[class~='featured'] {
+        border: 3px dashed #27ae60;
+        padding: 10px;
+      }
+      a[href^='https'] {
+        color: #27ae60;
+        font-weight: bold;
+      }
+      img[src$='.png'] {
+        border: 3px solid orange;
+      }
+      a[href*='google'] {
+        background-color: #fff9c4;
+      }
+      p[data-info='hello' i] {
+        color: #8e24aa;
+        font-style: italic;
+      }
+      p[data-info='CaseSensitive' s] {
+        color: #e74c3c;
+        text-decoration: underline;
+      }
+      /* Responsive */
+      @media (max-width: 700px) {
+        main {
+          padding: 1rem;
+        }
+        .theory {
+          padding: 0.7rem 1rem;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- **********************************************************
-         *  CSS Selectors Playground (h1 - type selector)          *
-         ********************************************************** -->
-    <h1>CSS Selectors Playground</h1>
-
-    <!-- **********************************************************
-         *  Class Selector Example                                 *
-         ********************************************************** -->
-    <p class="highlight">
-      This paragraph is styled using a <b>class selector</b>.
-    </p>
-    <!-- **********************************************************
-         *  ID Selector Example                                    *
-         ********************************************************** -->
-    <p id="special">This paragraph is styled using an <b>ID selector</b>.</p>
-
-    <!-- **********************************************************
-         !  Descendant & Child Selector Example (red, green)       !
-         ********************************************************** -->
-    <div class="container">
-      <p>This paragraph is styled using a <b>descendant selector</b>.</p>
-      <div>
+    <header>
+      <h1>🌟 CSS3 Selectors: Theory & Interactive Examples</h1>
+      <div style="font-size: 1.15rem; opacity: 0.95">
+        Master every CSS3 selector with clear explanations and live demos!
+      </div>
+    </header>
+    <main>
+      <section class="theory">
         <p>
-          This nested paragraph is also affected by the descendant selector.
+          <b>CSS3 selectors</b> are powerful tools that let you target HTML
+          elements in a variety of ways—by tag, class, id, attribute, position,
+          state, and more. Mastering selectors is essential for writing
+          efficient, maintainable, and scalable CSS.
         </p>
+        <p>
+          <b>Types of CSS3 Selectors:</b>
+        </p>
+        <ol>
+          <li><code>*</code> – Universal Selector</li>
+          <li><code>element</code> – Type Selector</li>
+          <li><code>.class</code> – Class Selector</li>
+          <li><code>#id</code> – ID Selector</li>
+          <li><code>A B</code> – Descendant Selector</li>
+          <li><code>A &gt; B</code> – Child Selector</li>
+          <li><code>A + B</code> – Adjacent Sibling Selector</li>
+          <li><code>A ~ B</code> – General Sibling Selector</li>
+          <li><code>[attr]</code> – Attribute Selector</li>
+          <li><code>[attr=value]</code> – Attribute Exact Match</li>
+          <li><code>[attr~=value]</code> – Attribute Contains Word</li>
+          <li><code>[attr^=value]</code> – Attribute Starts With</li>
+          <li><code>[attr$=value]</code> – Attribute Ends With</li>
+          <li><code>[attr*=value]</code> – Attribute Contains Substring</li>
+          <li><code>:pseudo-class</code> – Pseudo-class Selector</li>
+          <li><code>::pseudo-element</code> – Pseudo-element Selector</li>
+          <li>
+            Case-Insensitive (<code>i</code>) &amp; Case-Sensitive
+            (<code>s</code>) Attribute Matching
+          </li>
+        </ol>
+      </section>
+
+      <!-- 1. Universal Selector -->
+      <div class="selector-block">
+        <h2>1. <code>*</code> – Universal Selector</h2>
+        <div>Selects <b>all elements</b> on the page.</div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>* { font-family: Arial, sans-serif; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;h2&gt;Universal Selector Example&lt;/h2&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;p&gt;All text uses Arial font!&lt;/p&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <h2>Universal Selector Example</h2>
+            <p>All text uses Arial font!</p>
+          </div>
+        </div>
       </div>
-      <span>I am a direct child, styled using a <b>child selector</b>.</span>
-      <div>
-        <span> Lorem ipsum dolor sit. </span>
+
+      <!-- 2. Type Selector -->
+      <div class="selector-block">
+        <h2>2. <code>element</code> – Type Selector</h2>
+        <div>Selects all elements of a given type (tag name).</div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>h2 { color: #4f8cff; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;h2&gt;This is a heading&lt;/h2&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <h2>This is a heading</h2>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- **********************************************************
-         !  Sibling Selectors Example (red for adjacent/general)   !
-         ********************************************************** -->
-    <h2>Sibling Selectors</h2>
-    <p>
-      This paragraph is selected by <b>adjacent sibling selector</b> (h2 + p).
-    </p>
-    <p>This one is NOT adjacent sibling, so no special style.</p>
+      <!-- 3. Class Selector -->
+      <div class="selector-block">
+        <h2>3. <code>.class</code> – Class Selector</h2>
+        <div>Selects all elements with a specific class attribute.</div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>.highlight { background-color: #fff9c4; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;p class="highlight"&gt;Highlighted!&lt;/p&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <p class="highlight">
+              This paragraph is highlighted using a class selector.
+            </p>
+          </div>
+        </div>
+      </div>
 
-    <h3>General Sibling Example</h3>
-    <p>This paragraph and all following siblings get underlined by (h3 ~ p).</p>
-    <p>Yes, me too!</p>
+      <!-- 4. ID Selector -->
+      <div class="selector-block">
+        <h2>4. <code>#id</code> – ID Selector</h2>
+        <div>
+          Selects the element with a specific <code>id</code> attribute.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>#special { color: #27ae60; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;p id="special"&gt;Special!&lt;/p&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <p id="special">This paragraph is styled using an ID selector.</p>
+          </div>
+        </div>
+      </div>
 
-    <!-- **********************************************************
-         *  Attribute Selector Example                             *
-         ********************************************************** -->
-    <input type="text" placeholder="Styled by attribute selector" />
-    <input type="password" placeholder="Not styled" />
+      <!-- 5. Descendant Selector -->
+      <div class="selector-block">
+        <h2>5. <code>A B</code> – Descendant Selector</h2>
+        <div>
+          Selects all <b>B</b> elements that are <b>inside</b> an
+          <b>A</b> element, at any depth.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>.container p { color: #e67e22; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code
+              >&lt;div
+              class="container"&gt;&lt;p&gt;Descendant!&lt;/p&gt;&lt;/div&gt;</code
+            >
+          </div>
+          <div style="margin-top: 0.7em">
+            <div class="container">
+              <p>This paragraph is styled using a descendant selector.</p>
+              <div>
+                <p>
+                  This nested paragraph is also affected by the descendant
+                  selector.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <br /><br />
-    <!-- **********************************************************
-         *  Pseudo-class Selector Example (hover)                  *
-         ********************************************************** -->
-    <button>Hover over me!</button>
-    <button id="active">click over me!</button>
+      <!-- 6. Child Selector -->
+      <div class="selector-block">
+        <h2>6. <code>A &gt; B</code> – Child Selector</h2>
+        <div>
+          Selects all <b>B</b> elements that are <b>direct children</b> of
+          <b>A</b>.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>.container &gt; span { color: #8e24aa; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code
+              >&lt;div
+              class="container"&gt;&lt;span&gt;Child!&lt;/span&gt;&lt;/div&gt;</code
+            >
+          </div>
+          <div style="margin-top: 0.7em">
+            <div class="container">
+              <span>I am a direct child, styled using a child selector.</span>
+              <div>
+                <span>I'm not a direct child, so not styled.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Adjacent Sibling Selector -->
+      <div class="selector-block">
+        <h2>7. <code>A + B</code> – Adjacent Sibling Selector</h2>
+        <div>
+          Selects the <b>B</b> element that is <b>immediately after</b> an
+          <b>A</b> element.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>h2 + p { font-style: italic; color: #d35400; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;h2&gt;Title&lt;/h2&gt;&lt;p&gt;Adjacent!&lt;/p&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <h2>Sibling Selectors</h2>
+            <p>
+              This paragraph is selected by adjacent sibling selector (h2 + p).
+            </p>
+            <p>This one is NOT adjacent sibling, so no special style.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. General Sibling Selector -->
+      <div class="selector-block">
+        <h2>8. <code>A ~ B</code> – General Sibling Selector</h2>
+        <div>
+          Selects <b>all B</b> elements that are siblings of <b>A</b> and come
+          after it.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>h3 ~ p { text-decoration: underline; color: #1976d2; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code
+              >&lt;h3&gt;Title&lt;/h3&gt;&lt;p&gt;General
+              Sibling!&lt;/p&gt;</code
+            >
+          </div>
+          <div style="margin-top: 0.7em">
+            <h3>General Sibling Example</h3>
+            <p>
+              This paragraph and all following siblings get underlined by (h3 ~
+              p).
+            </p>
+            <p>Yes, me too!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Attribute Selector -->
+      <div class="selector-block">
+        <h2>9. <code>[attr]</code> – Attribute Selector</h2>
+        <div>
+          Selects elements that have a specific attribute, regardless of value.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code
+            >[disabled] { background-color: #ffd6d6; border: 2px solid #e74c3c;
+            }</code
+          >
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;button disabled&gt;Disabled Button&lt;/button&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;button&gt;Enabled Button&lt;/button&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <button disabled>Disabled Button</button>
+            <button>Enabled Button</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. Attribute Exact Match -->
+      <div class="selector-block">
+        <h2>10. <code>[attr=value]</code> – Attribute Exact Match</h2>
+        <div>Selects elements where the attribute value matches exactly.</div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>input[type="text"] { background-color: #f0f8ff; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;input type="text" placeholder="Styled!"&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;input type="password" placeholder="Not styled"&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <input type="text" placeholder="This will be styled" />
+            <input type="password" placeholder="This won't be styled" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. Attribute Contains Word -->
+      <div class="selector-block">
+        <h2>11. <code>[attr~=value]</code> – Attribute Contains Word</h2>
+        <div>
+          Selects elements whose attribute value is a space-separated list of
+          words, and one matches exactly.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>div[class~="featured"] { border: 2px solid #27ae60; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;div class="featured card"&gt;...&lt;/div&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;div class="featuredbox"&gt;...&lt;/div&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <div class="featured-example featured card">
+              I have class="featured card" → I am styled
+            </div>
+            <div class="featured-example featuredbox">
+              I have class="featuredbox" → Not styled
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. Attribute Starts With -->
+      <div class="selector-block">
+        <h2>12. <code>[attr^=value]</code> – Attribute Starts With</h2>
+        <div>
+          Selects elements whose attribute value <b>starts with</b> the given
+          value.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>a[href^="https"] { color: #27ae60; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;a href="https://site.com"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;a href="http://site.com"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <a href="https://site.com">Starts with https → Styled</a><br />
+            <a href="http://site.com">Does not start with https → Not styled</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13. Attribute Ends With -->
+      <div class="selector-block">
+        <h2>13. <code>[attr$=value]</code> – Attribute Ends With</h2>
+        <div>
+          Selects elements whose attribute value <b>ends with</b> the given
+          value.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>img[src$=".png"] { border: 3px solid orange; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;img src="logo.png"&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;img src="logo.jpg"&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <img
+              src="https://dummyimage.com/60x30/eee/333.png&text=PNG"
+              alt="png"
+              style="vertical-align: middle"
+            />
+            <img
+              src="https://dummyimage.com/60x30/eee/333.jpg&text=JPG"
+              alt="jpg"
+              style="vertical-align: middle"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- 14. Attribute Contains Substring -->
+      <div class="selector-block">
+        <h2>14. <code>[attr*=value]</code> – Attribute Contains Substring</h2>
+        <div>
+          Selects elements whose attribute value <b>contains</b> the value
+          anywhere.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>a[href*="google"] { background-color: #fff9c4; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;a href="https://www.google.com"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;a href="https://www.bing.com"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <a href="https://www.google.com">Contains google → Styled</a><br />
+            <a href="https://www.bing.com"
+              >Does not contain google → Not styled</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- 15. Pseudo-class Selector -->
+      <div class="selector-block">
+        <h2>15. <code>:pseudo-class</code> – Pseudo-class Selector</h2>
+        <div>
+          Selects elements in a specific state, such as <code>:hover</code>,
+          <code>:active</code>, <code>:focus</code>, <code>:visited</code>,
+          <code>:first-child</code>, <code>:last-child</code>,
+          <code>:nth-child()</code>, etc.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>button:hover { background: #ff9800; color: #fff; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;button&gt;Hover me!&lt;/button&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <button>Hover over me!</button>
+            <button id="active">Click me!</button>
+          </div>
+        </div>
+        <div class="example" style="margin-top: 1em">
+          <div class="label">Other pseudo-classes:</div>
+          <ul>
+            <li>
+              <code>:focus</code> –
+              <input type="text" placeholder="Focus me!" />
+            </li>
+            <li>
+              <code>:visited</code> –
+              <a href="https://www.example.com" target="_blank"
+                >Visit me, then see color change</a
+              >
+            </li>
+            <li>
+              <code>:required</code> –
+              <input type="text" required placeholder="Required field" />
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 16. Pseudo-element Selector -->
+      <div class="selector-block">
+        <h2>16. <code>::pseudo-element</code> – Pseudo-element Selector</h2>
+        <div>
+          Selects and styles part of an element, such as
+          <code>::first-letter</code>, <code>::first-line</code>,
+          <code>::before</code>, <code>::after</code>, <code>::selection</code>,
+          etc.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>p::first-letter { font-size: 1.5em; color: #4f8cff; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;p&gt;Hello, world!&lt;/p&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <p>
+              Hello, world! The first letter is styled using a pseudo-element.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 17. Case-Insensitive & Case-Sensitive Attribute Matching -->
+      <div class="selector-block">
+        <h2>17. Case-Insensitive &amp; Case-Sensitive Attribute Matching</h2>
+        <div>
+          Add <code>i</code> for case-insensitive, <code>s</code> for
+          case-sensitive matching in attribute selectors.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code
+            >p[data-info="hello" i] { color: #8e24aa; font-style: italic;
+            }</code
+          >
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;p data-info="HELLO"&gt;...&lt;/p&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;p data-info="HeLLo"&gt;...&lt;/p&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <p data-info="HELLO">Matches hello (case-insensitive)</p>
+            <p data-info="HeLLo">Matches hello (case-insensitive)</p>
+            <p data-info="CaseSensitive">
+              Not matched by above, but see below.
+            </p>
+          </div>
+        </div>
+        <div class="example" style="margin-top: 1em">
+          <div class="label">Case-sensitive:</div>
+          <code
+            >p[data-info="CaseSensitive" s] { color: #e74c3c; text-decoration:
+            underline; }</code
+          >
+          <div style="margin-top: 0.7em">
+            <p data-info="CaseSensitive">
+              This matches only if the case is exact.
+            </p>
+            <p data-info="casesensitive">This does not match (case differs).</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="theory" style="margin-top: 2.5rem">
+        <b>Summary:</b> <br />
+        CSS3 selectors allow you to target elements with great precision and
+        flexibility. Combine them to write powerful, maintainable stylesheets!
+      </section>
+    </main>
   </body>
 </html>

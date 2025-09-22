@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Box Model & Overflow in CSS</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0077b6;
+      --primary-light: #90e0ef;
+      --primary-dark: #023e8a;
+      --accent: #48cae4;
+      --bg: #f8f9fa;
+      --box-bg: #ffffff;
+      --shadow: 0 6px 24px rgba(0,0,0,0.10);
+      --radius: 16px;
+      --code-bg: #f3f3f3;
+      --code-color: #1a237e;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      color: #fff;
+      padding: 2.5rem 1rem 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 12px #0002;
+      border-radius: 0 0 var(--radius) var(--radius);
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.3em;
+      letter-spacing: -1px;
+      text-shadow: 0 2px 8px #0001;
+    }
+    h2 {
+      color: var(--primary-dark);
+      margin-top: 2.2rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .section {
+      background: var(--box-bg);
+      padding: 2.2rem 2rem 2rem 2rem;
+      margin: 2.5rem auto;
+      border-radius: var(--radius);
+      max-width: 900px;
+      box-shadow: var(--shadow);
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .section:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    }
+    ul {
+      margin: 1.1em 0 1.5em 1.5em;
+      padding: 0;
+      font-size: 1.07em;
+    }
+    ul li {
+      margin-bottom: 0.5em;
+      line-height: 1.6;
+    }
+    b {
+      color: var(--primary-dark);
+    }
+    /* Box Model Example */
+    .box-model {
+      background: linear-gradient(135deg, var(--primary-light) 60%, var(--accent) 100%);
+      border: 5px solid var(--primary);
+      padding: 28px 20px 20px 20px;
+      margin: 36px auto 0 auto;
+      width: 320px;
+      min-height: 90px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #0077b61a;
+      position: relative;
+      font-size: 1.13em;
+      font-weight: 500;
+      color: #023e8a;
+      transition: box-shadow 0.2s;
+    }
+    .box-model:hover {
+      box-shadow: 0 6px 32px #0077b62a;
+    }
+    .box-model::before {
+      content: "Box Model Example";
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 600;
+      font-size: 1.08em;
+      color: var(--primary-dark);
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 4px #fff7;
+    }
+    /* Visualize box model layers */
+    .box-model::after {
+      content: "";
+      position: absolute;
+      top: -18px; left: -18px; right: -18px; bottom: -18px;
+      border: 2px dashed #adb5bd;
+      border-radius: 16px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+    /* Overflow Examples */
+    .overflow-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      justify-content: center;
+      margin-top: 2.2em;
+    }
+    .overflow-box {
+      width: 210px;
+      height: 130px;
+      border: 2.5px solid var(--primary-dark);
+      padding: 12px 10px 10px 10px;
+      background: linear-gradient(120deg, #caf0f8 70%, #ade8f4 100%);
+      overflow: visible; /* default, will be overridden */
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #0077b61a;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      transition: box-shadow 0.2s;
+    }
+    .overflow-box:hover {
+      box-shadow: 0 6px 24px #0077b62a;
+    }
+    .overflow-box p {
+      width: 240px; /* force text overflow */
+      margin: 0.7em 0 0 0;
+      font-size: 1.04em;
+      color: #023e8a;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .visible   { overflow: visible; }
+    .hidden    { overflow: hidden; }
+    .scroll    { overflow: scroll; }
+    .auto      { overflow: auto; }
+    .overflow-box h3 {
+      margin: 0 0 5px;
+      font-size: 1.08em;
+      text-align: center;
+      background: var(--primary);
+      color: white;
+      padding: 5px 0 4px 0;
+      border-radius: 6px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 1px 4px #0077b62a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    /* Add a subtle legend for overflow demo */
+    .overflow-legend {
+      display: flex;
+      justify-content: center;
+      gap: 2.5em;
+      margin: 1.5em 0 0.5em 0;
+      font-size: 0.98em;
+      color: #495057;
+      opacity: 0.85;
+    }
+    .overflow-legend span {
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .overflow-legend .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 0.2em;
+    }
+    .dot.visible { background: #00b4d8; border: 2px solid #0096c7;}
+    .dot.hidden  { background: #adb5bd; border: 2px solid #495057;}
+    .dot.scroll  { background: #ffb703; border: 2px solid #fb8500;}
+    .dot.auto    { background: #90be6d; border: 2px solid #43aa8b;}
+    /* Responsive */
+    @media (max-width: 700px) {
+      .section { padding: 1.2rem 0.7rem; }
+      .box-model { width: 98%; min-width: 0; }
+      .overflow-container { flex-direction: column; gap: 18px; }
+      .overflow-box { width: 98%; min-width: 0; }
+    }
+    /* Code style for property names */
+    code {
+      background: var(--code-bg);
+      color: var(--code-color);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 1.01em;
+      font-family: 'Fira Mono', 'Consolas', monospace;
+    }
+    /* Decorative icons for list */
+    ul li::before {
+      content: "•";
+      color: var(--primary);
+      font-weight: bold;
+      display: inline-block;
+      width: 1.2em;
+      margin-left: -1.2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Understanding Box Model &amp; Overflow in CSS</h1>
+    <div style="font-size:1.13rem;opacity:0.93;margin-top:0.3em;">
+      Visualize how content, padding, border, and margin work – and what happens when content overflows!
+    </div>
+  </header>
+
+  <!-- Box Model Section -->
+  <div class="section">
+    <h2>📦 CSS Box Model</h2>
+    <p>
+      The CSS <b>Box Model</b> describes how every HTML element is a rectangular box.<br>
+      It consists of <b>content</b>, <b>padding</b>, <b>border</b>, and <b>margin</b> layers:
+    </p>
+    <ul>
+      <li><b>Content</b>: The actual text or image inside the box.</li>
+      <li><b>Padding</b>: Space between the content and the border (inside).</li>
+      <li><b>Border</b>: The edge around the padding.</li>
+      <li><b>Margin</b>: Space outside the border, separating elements.</li>
+    </ul>
+    <div class="box-model">
+      Content inside box
+    </div>
+    <div style="text-align:center;margin-top:1.2em;font-size:0.98em;color:#495057;opacity:0.85;">
+      <span style="display:inline-block;background:#90e0ef;border:2px solid #0077b6;border-radius:6px;padding:2px 10px 2px 10px;">
+        <b>Tip:</b> Use <code>box-sizing: border-box</code> to include padding and border in the element's total width/height.
+      </span>
+    </div>
+  </div>
+
+  <!-- Overflow Section -->
+  <div class="section">
+    <h2>🌀 CSS Overflow Property</h2>
+    <p>
+      The <code>overflow</code> property controls how content is handled when it doesn’t fit inside a box.
+    </p>
+    <ul>
+      <li><b>visible</b>: Default. Content spills outside the box.</li>
+      <li><b>hidden</b>: Extra content is cut off.</li>
+      <li><b>scroll</b>: Always adds scrollbars.</li>
+      <li><b>auto</b>: Adds scrollbars only when necessary.</li>
+    </ul>
+    <div class="overflow-legend">
+      <span><span class="dot visible"></span>visible</span>
+      <span><span class="dot hidden"></span>hidden</span>
+      <span><span class="dot scroll"></span>scroll</span>
+      <span><span class="dot auto"></span>auto</span>
+    </div>
+    <div class="overflow-container">
+      <div class="overflow-box visible">
+        <h3>visible</h3>
+        <p>
+          This text is too long and will overflow outside the box. Notice how it spills out, ignoring the box boundary.
+        </p>
+      </div>
+      <div class="overflow-box hidden">
+        <h3>hidden</h3>
+        <p>
+          This text is too long and will overflow outside the box. The extra part is clipped and not visible.
+        </p>
+      </div>
+      <div class="overflow-box scroll">
+        <h3>scroll</h3>
+        <p>
+          This text is too long and will overflow outside the box. Scrollbars appear even if not needed.
+        </p>
+      </div>
+      <div class="overflow-box auto">
+        <h3>auto</h3>
+        <p>
+          This text is too long and will overflow outside the box. Scrollbars appear only if needed.
+        </p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:1.5em;font-size:0.98em;color:#495057;opacity:0.85;">
+      <span style="display:inline-block;background:#caf0f8;border:2px solid #0077b6;border-radius:6px;padding:2px 10px 2px 10px;">
+        <b>Try it:</b> Resize your browser window to see how overflow changes!
+      </span>
+    </div>
+  </div>
+</body>
+</html>
+        </div>
+        <div class="overflow-box scroll">
+          <h3>scroll</h3>
+          <p>This text is too long and will overflow outside the box.</p>
+        </div>
+        <div class="overflow-box auto">
+          <h3>auto</h3>
+          <p>This text is too long and will overflow outside the box.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

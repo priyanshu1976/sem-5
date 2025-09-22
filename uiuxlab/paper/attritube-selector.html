@@ -1,71 +1,428 @@
-<!--
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                                                                            ║
-║                        🌟 ATTRIBUTE SELECTORS IN CSS 🌟                    ║
-║                                                                            ║
-║  Attribute selectors let you style elements based on their attributes       ║
-║  (like type, href, alt, src, etc). This is super useful for targeting      ║
-║  elements without adding extra classes or IDs, keeping your CSS clean,     ║
-║  organized, and scalable!                                                  ║
-║                                                                            ║
-║  ──────────────── TYPES OF ATTRIBUTE SELECTORS ────────────────            ║
-║                                                                            ║
-║  1. [attr]    → Has Attribute                                              ║
-║     Selects elements that have a specific attribute (any value).           ║
-║     Example:                                                               ║
-║         [input] { border: 2px solid blue; }                                ║
-║     ✅ Styles all <input> elements (any type).                             ║
-║                                                                            ║
-║  2. [attr=value]    → Exact Match                                          ║
-║     Selects elements where attribute value matches exactly.                ║
-║     Example:                                                               ║
-║         input[type="text"] { background-color: lightyellow; }              ║
-║     ✅ Only <input type="text"> gets yellow background.                    ║
-║     ❌ <input type="password"> not affected.                               ║
-║                                                                            ║
-║  3. [attr~=value]    → Contains Word                                       ║
-║     Selects elements whose attribute value is a space-separated list       ║
-║     of words, and one matches exactly.                                     ║
-║     Example:                                                               ║
-║         div[class~="featured"] { border: 2px solid green; }                ║
-║     ✅ <div class="featured card"> is selected                             ║
-║     ✅ <div class="highlight featured big"> is selected                    ║
-║     ❌ <div class="featuredbox"> is NOT selected                           ║
-║                                                                            ║
-║  4. [attr^=value]    → Starts With                                         ║
-║     Selects elements whose attribute value starts with given value.        ║
-║     Example:                                                               ║
-║         a[href^="https"] { color: green; }                                 ║
-║     ✅ <a href="https://..."> is green                                     ║
-║     ❌ <a href="http://..."> is not selected                               ║
-║                                                                            ║
-║  5. [attr$=value]    → Ends With                                           ║
-║     Selects elements whose attribute value ends with given value.          ║
-║     Example:                                                               ║
-║         img[src$=".png"] { border: 2px solid red; }                        ║
-║     ✅ <img src="logo.png"> has red border                                 ║
-║     ❌ <img src="logo.jpg"> not affected                                   ║
-║                                                                            ║
-║  6. [attr*=value]    → Contains Anywhere                                   ║
-║     Selects elements whose attribute value contains value anywhere.        ║
-║     Example:                                                               ║
-║         a[href*="google"] { color: blue; }                                 ║
-║     ✅ <a href="https://www.google.com/"> is blue                          ║
-║     ✅ <a href="https://mail.google.co.in"> is blue                        ║
-║     ❌ <a href="https://yahoo.com"> not affected                           ║
-║                                                                            ║
-║  7. Case-Insensitive Matching (i or I)                                     ║
-║     Add 'i' to make the match case-insensitive.                            ║
-║     Example:                                                               ║
-║         a[href="EXAMPLE" i] { color: purple; }                             ║
-║     ✅ Matches <a href="example">, <a href="EXAMPLE">, <a href="ExAmPlE">  ║
-║                                                                            ║
-║  8. Case-Sensitive Matching (s or S)                                       ║
-║     Add 's' to force case-sensitive match (default in most browsers).      ║
-║     Example:                                                               ║
-║         a[href="Example" s] { color: red; }                                ║
-║     ✅ Only matches <a href="Example">                                      ║
-║     ❌ Won’t match <a href="example"> or <a href="EXAMPLE">                ║
-║                                                                            ║
-╚══════════════════════════════════════════════════════════════════════════════╝
--->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🌟 CSS Attribute Selectors: Theory & Examples 🌟</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f8fafc;
+        color: #222;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background: linear-gradient(90deg, #4f8cff 0%, #a0e7e5 100%);
+        color: #fff;
+        padding: 2rem 1rem 1rem 1rem;
+        text-align: center;
+        box-shadow: 0 2px 8px #0001;
+      }
+      main {
+        max-width: 800px;
+        margin: 2rem auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px #0002;
+        padding: 2rem;
+      }
+      h1 {
+        font-size: 2.2rem;
+        margin-bottom: 0.5rem;
+      }
+      h2 {
+        color: #4f8cff;
+        margin-top: 2.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+      }
+      .theory {
+        background: #eaf4ff;
+        border-left: 5px solid #4f8cff;
+        padding: 1rem 1.5rem;
+        margin-bottom: 2rem;
+        border-radius: 0 8px 8px 0;
+        font-size: 1.08rem;
+      }
+      .selector-block {
+        margin-bottom: 2.5rem;
+      }
+      .selector-block code,
+      .example code {
+        background: #f3f3f3;
+        color: #1a237e;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 1.01em;
+      }
+      .example {
+        background: #f9f9f9;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        padding: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .example .label {
+        font-weight: bold;
+        color: #4f8cff;
+        margin-right: 0.5em;
+      }
+      .check {
+        color: #2ecc40;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+      .cross {
+        color: #e74c3c;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+      /* Attribute selector styles for demonstration */
+      [disabled] {
+        background-color: #ffd6d6;
+        border: 2px solid #e74c3c;
+      }
+      input[type='text'] {
+        border: 2px solid #4f8cff;
+        background-color: #f0f8ff;
+      }
+      .featured-example[class~='featured'] {
+        border: 3px dashed #27ae60;
+        padding: 10px;
+      }
+      a[href^='https'] {
+        color: #27ae60;
+        font-weight: bold;
+      }
+      img[src$='.png'] {
+        border: 3px solid orange;
+      }
+      a[href*='google'] {
+        background-color: #fff9c4;
+      }
+      p[data-info='hello' i] {
+        color: #8e24aa;
+        font-style: italic;
+      }
+      p[data-info='CaseSensitive' s] {
+        color: #e74c3c;
+        text-decoration: underline;
+      }
+      .example-row {
+        margin-bottom: 0.5em;
+      }
+      @media (max-width: 600px) {
+        main {
+          padding: 1rem;
+        }
+        .theory {
+          padding: 0.7rem 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>🌟 CSS Attribute Selectors</h1>
+      <div style="font-size: 1.1rem; opacity: 0.95">
+        Theory &amp; Interactive Examples
+      </div>
+    </header>
+    <main>
+      <section class="theory">
+        <p>
+          <b>Attribute selectors</b> let you style elements based on their
+          attributes (like <code>type</code>, <code>href</code>,
+          <code>alt</code>, <code>src</code>, etc). This is super useful for
+          targeting elements without adding extra classes or IDs, keeping your
+          CSS clean, organized, and scalable!
+        </p>
+        <p>
+          <b>Types of Attribute Selectors:</b>
+        </p>
+        <ol>
+          <li><code>[attr]</code> – Has Attribute</li>
+          <li><code>[attr=value]</code> – Exact Match</li>
+          <li><code>[attr~=value]</code> – Contains Word</li>
+          <li><code>[attr^=value]</code> – Starts With</li>
+          <li><code>[attr$=value]</code> – Ends With</li>
+          <li><code>[attr*=value]</code> – Contains Anywhere</li>
+          <li>Case-Insensitive Matching (<code>i</code> or <code>I</code>)</li>
+          <li>Case-Sensitive Matching (<code>s</code> or <code>S</code>)</li>
+        </ol>
+      </section>
+
+      <!-- 1. [attr] -->
+      <div class="selector-block">
+        <h2>1. <code>[attr]</code> – Has Attribute</h2>
+        <div>Styles elements that have a specific attribute (any value).</div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code
+            >[disabled] { background-color: #ffd6d6; border: 2px solid red;
+            }</code
+          >
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;button disabled&gt;Disabled Button&lt;/button&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;button&gt;Enabled Button&lt;/button&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <button disabled>Disabled Button</button>
+            <button>Enabled Button</button>
+          </div>
+          <div style="margin-top: 0.5em">
+            <span class="check">✅</span>Styles all
+            <code>&lt;button disabled&gt;</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. [attr=value] -->
+      <div class="selector-block">
+        <h2>2. <code>[attr=value]</code> – Exact Match</h2>
+        <div>Selects elements where attribute value matches exactly.</div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>input[type="text"] { background-color: #f0f8ff; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;input type="text" placeholder="Styled!"&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;input type="password" placeholder="Not styled"&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <input type="text" placeholder="This will be styled" />
+            <input type="password" placeholder="This won't be styled" />
+          </div>
+          <div style="margin-top: 0.5em">
+            <span class="check">✅</span>Only
+            <code>&lt;input type="text"&gt;</code> gets background<br />
+            <span class="cross">❌</span
+            ><code>&lt;input type="password"&gt;</code> not affected
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. [attr~=value] -->
+      <div class="selector-block">
+        <h2>3. <code>[attr~=value]</code> – Contains Word</h2>
+        <div>
+          Selects elements whose attribute value is a space-separated list of
+          words, and one matches exactly.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>div[class~="featured"] { border: 2px solid green; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;div class="featured card"&gt;...&lt;/div&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;div class="featuredbox"&gt;...&lt;/div&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <div class="featured-example featured card">
+              I have class="featured card" → I am styled
+            </div>
+            <div class="featured-example featuredbox">
+              I have class="featuredbox" → Not styled
+            </div>
+          </div>
+          <div style="margin-top: 0.5em">
+            <span class="check">✅</span
+            ><code>&lt;div class="featured card"&gt;</code> is selected<br />
+            <span class="cross">❌</span
+            ><code>&lt;div class="featuredbox"&gt;</code> is NOT selected
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. [attr^=value] -->
+      <div class="selector-block">
+        <h2>4. <code>[attr^=value]</code> – Starts With</h2>
+        <div>
+          Selects elements whose attribute value <b>starts with</b> the given
+          value.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>a[href^="https"] { color: green; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;a href="https://..."&gt;...&lt;/a&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;a href="http://..."&gt;...&lt;/a&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <a href="https://example.com">Starts with https → Styled</a><br />
+            <a href="http://example.com"
+              >Starts with http (no s) → Not Styled</a
+            >
+          </div>
+          <div style="margin-top: 0.5em">
+            <span class="check">✅</span
+            ><code>&lt;a href="https://..."&gt;</code> is green<br />
+            <span class="cross">❌</span
+            ><code>&lt;a href="http://..."&gt;</code> not selected
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. [attr$=value] -->
+      <div class="selector-block">
+        <h2>5. <code>[attr$=value]</code> – Ends With</h2>
+        <div>
+          Selects elements whose attribute value <b>ends with</b> the given
+          value.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>img[src$=".png"] { border: 2px solid red; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row"><code>&lt;img src="logo.png"&gt;</code></div>
+          <div class="example-row"><code>&lt;img src="logo.jpg"&gt;</code></div>
+          <div style="margin-top: 0.7em">
+            <img src="logo.png" alt="Logo PNG" width="100" />
+            <img src="logo.jpg" alt="Logo JPG" width="100" />
+          </div>
+          <div style="margin-top: 0.5em">
+            <span class="check">✅</span
+            ><code>&lt;img src="logo.png"&gt;</code> has border<br />
+            <span class="cross">❌</span
+            ><code>&lt;img src="logo.jpg"&gt;</code> not affected
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. [attr*=value] -->
+      <div class="selector-block">
+        <h2>6. <code>[attr*=value]</code> – Contains Anywhere</h2>
+        <div>
+          Selects elements whose attribute value <b>contains</b> the value
+          anywhere.
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>a[href*="google"] { background-color: yellow; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;a href="https://www.google.com"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;a href="https://www.bing.com"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <a href="https://www.google.com">Contains google → Styled</a><br />
+            <a href="https://www.bing.com"
+              >Does not contain google → Not Styled</a
+            >
+          </div>
+          <div style="margin-top: 0.5em">
+            <span class="check">✅</span
+            ><code>&lt;a href="https://www.google.com"&gt;</code> is styled<br />
+            <span class="cross">❌</span
+            ><code>&lt;a href="https://www.bing.com"&gt;</code> not affected
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Case-Insensitive Matching -->
+      <div class="selector-block">
+        <h2>7. Case-Insensitive Matching (<code>i</code> or <code>I</code>)</h2>
+        <div>Add <code>i</code> to make the match case-insensitive.</div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>a[href="EXAMPLE" i] { color: purple; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;a href="example"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;a href="EXAMPLE"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;a href="ExAmPlE"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <a href="example" style="color: purple">Matches (example)</a><br />
+            <a href="EXAMPLE" style="color: purple">Matches (EXAMPLE)</a><br />
+            <a href="ExAmPlE" style="color: purple">Matches (ExAmPlE)</a>
+          </div>
+          <div style="margin-top: 0.5em">
+            <span class="check">✅</span>Matches
+            <code>&lt;a href="example"&gt;</code>,
+            <code>&lt;a href="EXAMPLE"&gt;</code>,
+            <code>&lt;a href="ExAmPlE"&gt;</code>
+          </div>
+        </div>
+        <div class="example" style="margin-top: 1em">
+          <div class="label">
+            Another Example (with <code>data-info</code>):
+          </div>
+          <code
+            >p[data-info="hello" i] { color: purple; font-style: italic; }</code
+          >
+          <div style="margin-top: 0.7em">
+            <p data-info="HELLO">Matches hello (case-insensitive)</p>
+            <p data-info="HeLLo">Matches hello (case-insensitive)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Case-Sensitive Matching -->
+      <div class="selector-block">
+        <h2>8. Case-Sensitive Matching (<code>s</code> or <code>S</code>)</h2>
+        <div>
+          Add <code>s</code> to force case-sensitive match (default in most
+          browsers).
+        </div>
+        <div class="example">
+          <div class="label">CSS:</div>
+          <code>a[href="Example" s] { color: red; }</code>
+          <div class="label" style="margin-top: 0.5em">HTML:</div>
+          <div class="example-row">
+            <code>&lt;a href="Example"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;a href="example"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div class="example-row">
+            <code>&lt;a href="EXAMPLE"&gt;...&lt;/a&gt;</code>
+          </div>
+          <div style="margin-top: 0.7em">
+            <a href="Example" style="color: red">Matches (Example)</a><br />
+            <a href="example">Does NOT match (example)</a><br />
+            <a href="EXAMPLE">Does NOT match (EXAMPLE)</a>
+          </div>
+          <div style="margin-top: 0.5em">
+            <span class="check">✅</span>Only matches
+            <code>&lt;a href="Example"&gt;</code><br />
+            <span class="cross">❌</span>Won’t match
+            <code>&lt;a href="example"&gt;</code> or
+            <code>&lt;a href="EXAMPLE"&gt;</code>
+          </div>
+        </div>
+        <div class="example" style="margin-top: 1em">
+          <div class="label">
+            Another Example (with <code>data-info</code>):
+          </div>
+          <code
+            >p[data-info="CaseSensitive" s] { color: red; text-decoration:
+            underline; }</code
+          >
+          <div style="margin-top: 0.7em">
+            <p data-info="CaseSensitive">Matches EXACT case</p>
+            <p data-info="casesensitive">Does NOT match (different case)</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
