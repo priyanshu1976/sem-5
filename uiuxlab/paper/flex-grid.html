@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSS Display · Flexbox · Grid — Playground & Reference</title>
+    <style>
+      :root {
+        --bg: #0f1724;
+        --card: #0b1220;
+        --muted: #9aa4b2;
+        --accent: #7dd3fc;
+        --panel: #0b1220;
+        --surface: #071024;
+        --glass: rgba(255, 255, 255, 0.02);
+      }
+      html {
+        box-sizing: border-box;
+      }
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+      body {
+        font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial;
+        margin: 0;
+        color: #e6eef6;
+        background: linear-gradient(180deg, var(--bg), #071022 120%);
+        padding: 24px;
+        line-height: 1.45;
+      }
+      header {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+      p.lead,
+      .lead {
+        color: var(--muted);
+        margin: 6px 0 0 0;
+        font-size: 13px;
+      }
+      main {
+        display: grid;
+        grid-template-columns: 380px 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+      nav.card {
+        background: var(--card);
+        border-radius: 12px;
+        padding: 14px;
+        box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+        height: calc(100vh - 120px);
+        overflow: auto;
+      }
+      section.panel {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border-radius: 12px;
+        padding: 14px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        min-height: 160px;
+      }
+      .topic {
+        margin-bottom: 14px;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      pre.code {
+        background: #071226;
+        padding: 12px;
+        border-radius: 8px;
+        overflow: auto;
+        font-size: 13px;
+        color: #bfe9ff;
+        margin: 10px 0;
+        word-break: break-all;
+      }
+      .play {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+      .controls {
+        background: var(--glass);
+        border-radius: 8px;
+        padding: 10px;
+        min-width: 260px;
+        color: var(--muted);
+        flex: 1 1 300px;
+        max-width: 100%;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+        color: var(--muted);
+        margin: 8px 0 6px;
+      }
+      select,
+      input[type='number'],
+      input[type='text'] {
+        width: 100%;
+        padding: 8px;
+        border-radius: 6px;
+        background: #061122;
+        color: #dbeafe;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        font-size: 15px;
+      }
+      .preview {
+        flex: 2 1 320px;
+        border-radius: 8px;
+        padding: 12px;
+        background: #021022;
+        min-height: 240px;
+        overflow: auto;
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        max-width: 100%;
+      }
+      .flex-demo,
+      .grid-demo,
+      .display-demo {
+        background: linear-gradient(180deg, #061428, #031024);
+        padding: 12px;
+        border-radius: 8px;
+        min-height: 120px;
+        overflow-x: auto;
+      }
+      .demo-box {
+        padding: 10px;
+        border-radius: 6px;
+        background: #08293a;
+        color: #dff3ff;
+        margin: 8px;
+        text-align: center;
+        font-weight: 600;
+        min-width: 60px;
+        word-break: break-word;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .kbd {
+        background: #022;
+        padding: 6px 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        color: #7ee0ff;
+      }
+      footer {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .grid-sample .item {
+        background: #063544;
+        border-radius: 6px;
+        padding: 10px;
+        color: #dff3ff;
+        font-weight: 600;
+        text-align: center;
+      }
+      .controls-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .copy-btn {
+        margin-top: 8px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        background: #042;
+        color: #9ef;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        font-size: 15px;
+      }
+      /* Responsive styles */
+      @media (max-width: 980px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+        nav.card {
+          height: auto;
+          margin-bottom: 18px;
+        }
+        .play {
+          flex-direction: column;
+        }
+        .controls,
+        .preview {
+          min-width: 0;
+          width: 100%;
+          max-width: 100%;
+        }
+        .controls {
+          margin-bottom: 12px;
+        }
+      }
+      @media (max-width: 700px) {
+        body {
+          padding: 8px;
+        }
+        header {
+          flex-direction: column;
+          gap: 8px;
+          align-items: flex-start;
+        }
+        h1 {
+          font-size: 16px;
+        }
+        .panel {
+          padding: 8px;
+        }
+        .controls {
+          padding: 6px;
+        }
+        .preview {
+          padding: 6px;
+        }
+        pre.code {
+          font-size: 12px;
+          padding: 8px;
+        }
+      }
+      @media (max-width: 520px) {
+        .play {
+          flex-direction: column;
+          gap: 6px;
+        }
+        .controls,
+        .preview {
+          padding: 4px;
+        }
+        .demo-box {
+          margin: 4px;
+          padding: 6px;
+          font-size: 13px;
+        }
+        .grid-demo,
+        .flex-demo,
+        .display-demo {
+          padding: 6px;
+        }
+      }
+      /* Responsive for code example grid */
+      @media (max-width: 700px) {
+        #examples > div[style*='grid-template-columns'] {
+          grid-template-columns: 1fr !important;
+        }
+      }
+      /* Responsive for display theory grid */
+      @media (max-width: 700px) {
+        #display > div[style*='grid-template-columns'] {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>CSS Display · Flexbox · Grid — Interactive Reference</h1>
+        <div class="lead">
+          A concise theory + examples + live playground (from your uploaded
+          PPT).
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <nav class="card">
+        <div class="topic">
+          <strong>Contents</strong>
+          <div class="small">Click a playground to jump</div>
+          <ul style="margin-top: 8px; padding-left: 18px; color: var(--muted)">
+            <li>
+              <a href="#display" style="color: inherit"
+                >display (block|inline|inline-block|none|flex|grid)</a
+              >
+            </li>
+            <li>
+              <a href="#flex" style="color: inherit"
+                >Flexbox — container & item properties</a
+              >
+            </li>
+            <li>
+              <a href="#grid" style="color: inherit"
+                >Grid — container & item properties</a
+              >
+            </li>
+            <li>
+              <a href="#examples" style="color: inherit"
+                >Copyable full examples</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="topic">
+          <strong>Quick Theory</strong>
+          <div class="muted">
+            <p>
+              <strong>display</strong> decides how an element participates in
+              layout (block/inline/inline-block/flex/grid/none). Block consumes
+              full width and starts on new line; inline flows inside lines.
+            </p>
+            <p>
+              <strong>Flexbox</strong> is <em>one-dimensional</em> (main + cross
+              axis). Use for linear alignment, centering, nav bars, responsive
+              rows/columns.
+            </p>
+            <p>
+              <strong>Grid</strong> is <em>two-dimensional</em>—rows +
+              columns—useful for full page layouts and complex placements.
+            </p>
+          </div>
+        </div>
+
+        <div class="topic">
+          <strong>Use these examples to learn:</strong>
+          <ul style="color: var(--muted); padding-left: 18px">
+            <li>Change properties and see result instantly</li>
+            <li>Read copyable code snippets</li>
+            <li>Experiment with combined layouts</li>
+          </ul>
+        </div>
+
+        <footer>Built from your PPT. Source slide notes included.</footer>
+      </nav>
+
+      <section>
+        <!-- DISPLAY -->
+        <article id="display" class="panel">
+          <h2 style="margin: 0 0 8px 0">display — theory & examples</h2>
+          <div class="muted small">
+            How elements are rendered. Default depends on element type.
+          </div>
+
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 300px;
+              gap: 12px;
+              margin-top: 12px;
+            "
+          >
+            <div>
+              <p><strong>Common values</strong></p>
+              <ul class="muted">
+                <li>
+                  <strong>block</strong> — occupies full available width; starts
+                  on new line (e.g. &lt;div&gt;).
+                </li>
+                <li>
+                  <strong>inline</strong> — flows within a line; width = content
+                  (e.g. &lt;span&gt;).
+                </li>
+                <li>
+                  <strong>inline-block</strong> — like inline but supports
+                  width/height.
+                </li>
+                <li>
+                  <strong>none</strong> — element removed from layout/flow.
+                </li>
+                <li>
+                  <strong>flex</strong> — creates a flex container; children are
+                  flex items.
+                </li>
+                <li>
+                  <strong>grid</strong> — creates a grid container; children are
+                  grid items.
+                </li>
+              </ul>
+
+              <p class="small muted">
+                Example — inline vs block vs inline-block:
+              </p>
+              <pre class="code">
+&lt;div style="display:block"&gt;Block&lt;/div&gt;
+&lt;span style="display:inline"&gt;Inline text&lt;/span&gt;
+&lt;div style="display:inline-block; width:120px; height:40px"&gt;Inline-block&lt;/div&gt;
+</pre
+              >
+            </div>
+
+            <div class="display-demo panel">
+              <div class="small muted">
+                Try toggling these examples in your own pages — block breaks
+                line, inline does not, inline-block keeps dimension.
+              </div>
+              <div style="margin-top: 8px" class="row">
+                <div class="demo-box" style="display: block; width: 100%">
+                  Block box (full width)
+                </div>
+                <span class="demo-box" style="display: inline">Inline</span>
+                <div
+                  class="demo-box"
+                  style="display: inline-block; width: 140px"
+                >
+                  Inline-block (140px)
+                </div>
+                <div class="demo-box" style="display: none">
+                  Hidden (display:none)
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- FLEX -->
+        <article id="flex" class="panel" style="margin-top: 18px">
+          <h2 style="margin: 0 0 8px 0">Flexbox — parent & item properties</h2>
+          <div class="muted small">
+            One-dimensional layout along a main axis and cross axis. Container
+            properties control flow; item properties control sizing and
+            alignment.
+          </div>
+
+          <div class="play" style="margin-top: 12px">
+            <div class="controls">
+              <label for="fd">flex-direction</label>
+              <select id="fd">
+                <option value="row">row (default)</option>
+                <option value="row-reverse">row-reverse</option>
+                <option value="column">column</option>
+                <option value="column-reverse">column-reverse</option>
+              </select>
+
+              <label for="fw">flex-wrap</label>
+              <select id="fw">
+                <option value="nowrap">nowrap (default)</option>
+                <option value="wrap">wrap</option>
+                <option value="wrap-reverse">wrap-reverse</option>
+              </select>
+
+              <label for="jc">justify-content</label>
+              <select id="jc">
+                <option value="flex-start">flex-start</option>
+                <option value="flex-end">flex-end</option>
+                <option value="center">center</option>
+                <option value="space-between">space-between</option>
+                <option value="space-around">space-around</option>
+                <option value="space-evenly">space-evenly</option>
+              </select>
+
+              <label for="ai">align-items</label>
+              <select id="ai">
+                <option value="stretch">stretch (default)</option>
+                <option value="flex-start">flex-start</option>
+                <option value="flex-end">flex-end</option>
+                <option value="center">center</option>
+                <option value="baseline">baseline</option>
+              </select>
+
+              <label>align-content</label>
+              <select id="ac">
+                <option value="stretch">stretch (default)</option>
+                <option value="flex-start">flex-start</option>
+                <option value="flex-end">flex-end</option>
+                <option value="center">center</option>
+                <option value="space-between">space-between</option>
+                <option value="space-around">space-around</option>
+                <option value="space-evenly">space-evenly</option>
+              </select>
+
+              <label style="margin-top: 10px">Add 1 item or remove</label>
+              <div style="display: flex; gap: 8px">
+                <button id="addItem" class="copy-btn">+ Add item</button>
+                <button id="rmItem" class="copy-btn">− Remove</button>
+              </div>
+
+              <div style="margin-top: 8px">
+                <div class="small muted">Per-item visual controls:</div>
+                <label
+                  >Set item 2 <em>flex</em> (flex-grow flex-shrink
+                  flex-basis)</label
+                >
+                <input id="item2flex" type="text" value="1 1 120px" />
+                <label>Set item 3 align-self</label>
+                <select id="item3as">
+                  <option value="auto">auto</option>
+                  <option value="flex-start">flex-start</option>
+                  <option value="flex-end">flex-end</option>
+                  <option value="center">center</option>
+                  <option value="baseline">baseline</option>
+                  <option value="stretch">stretch</option>
+                </select>
+              </div>
+              <button id="copyFlex" class="copy-btn">Copy flex CSS</button>
+            </div>
+
+            <div class="preview">
+              <div class="small muted">
+                Live preview — change controls to update the flex container
+              </div>
+
+              <div
+                id="flexPreview"
+                class="flex-demo"
+                style="
+                  display: flex;
+                  gap: 10px;
+                  padding: 12px;
+                  margin-top: 8px;
+                  min-height: 160px;
+                  align-content: stretch;
+                "
+              >
+                <div class="demo-box" id="f1" style="min-width: 80px">
+                  Item 1
+                </div>
+                <div class="demo-box" id="f2" style="min-width: 80px">
+                  Item 2
+                </div>
+                <div class="demo-box" id="f3" style="min-width: 80px">
+                  Item 3
+                </div>
+              </div>
+
+              <pre id="flexCSS" class="code" style="margin-top: 10px">
+/* container */
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+/* items */
+.item { flex: 0 1 auto; align-self: auto; }
+          </pre
+              >
+            </div>
+          </div>
+
+          <div style="margin-top: 12px" class="muted">
+            <strong>Item properties</strong> — <code>flex-grow</code>,
+            <code>flex-shrink</code>, <code>flex-basis</code>, shorthand
+            <code>flex</code>, and <code>align-self</code>.
+            <div class="small">
+              E.g. <code>.item { flex: 1 0 150px; }</code> — grow to fill, don't
+              shrink, base 150px.
+            </div>
+          </div>
+
+          <div style="margin-top: 10px">
+            <strong>Example code (center horizontally & vertically):</strong>
+            <pre class="code">
+&lt;div class="container"&gt;
+  &lt;div class="item"&gt;1&lt;/div&gt;
+  &lt;div class="item"&gt;2&lt;/div&gt;
+&lt;/div&gt;
+
+.container{ display:flex; justify-content:center; align-items:center; height:260px; }
+.item{ padding:10px; background:#064; color:white; border-radius:6px; }
+</pre
+            >
+          </div>
+        </article>
+
+        <!-- GRID -->
+        <article id="grid" class="panel" style="margin-top: 18px">
+          <h2 style="margin: 0 0 8px 0">CSS Grid — parent & item properties</h2>
+          <div class="muted small">
+            Two-dimensional layout — rows and columns. Use `grid-template-*`,
+            `gap`, `grid-auto-flow`, and place items using `grid-column`,
+            `grid-row`, or `grid-area`.
+          </div>
+
+          <div class="play" style="margin-top: 12px">
+            <div class="controls">
+              <label>grid-template-columns (CSS)</label>
+              <input id="gtc" type="text" value="1fr 1fr 1fr" />
+
+              <label>grid-template-rows</label>
+              <input id="gtr" type="text" value="120px auto" />
+
+              <label>gap</label>
+              <input id="gap" type="text" value="12px" />
+
+              <label>grid-auto-flow</label>
+              <select id="gaf">
+                <option value="row">row</option>
+                <option value="column">column</option>
+                <option value="row dense">row dense</option>
+                <option value="column dense">column dense</option>
+              </select>
+
+              <div style="margin-top: 8px">
+                <label>Place item 2 (grid-column / grid-row)</label>
+                <input
+                  id="item2pos"
+                  type="text"
+                  value="2 / 4 / 1 / 2"
+                  placeholder="col-start / col-end / row-start / row-end (optional)"
+                />
+                <div class="small muted">
+                  Or use shorthand: <code>grid-column: 2 / 4;</code>
+                </div>
+              </div>
+              <button id="copyGrid" class="copy-btn">Copy grid CSS</button>
+            </div>
+
+            <div class="preview">
+              <div class="small muted">Live grid preview</div>
+              <div
+                id="gridPreview"
+                class="grid-demo grid-sample"
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr 1fr;
+                  gap: 12px;
+                  margin-top: 8px;
+                  padding: 12px;
+                "
+              >
+                <div class="item">A</div>
+                <div class="item" id="g2">B</div>
+                <div class="item">C</div>
+                <div class="item">D</div>
+                <div class="item">E</div>
+                <div class="item">F</div>
+              </div>
+
+              <pre id="gridCSS" class="code" style="margin-top: 10px">
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 12px;
+}
+.item { padding:10px; background:#063544; color:#dff3ff; }
+          </pre
+              >
+            </div>
+          </div>
+
+          <div style="margin-top: 12px" class="muted">
+            <strong>Examples of placement</strong>
+            <pre class="code">
+/* place an item spanning columns 1 to 3 */
+.item1 { grid-column: 1 / 3; grid-row: 1 / 2; }
+
+/* shorthand grid-area: row-start / col-start / row-end / col-end */
+.item2 { grid-area: 1 / 3 / 3 / 4; }</pre
+            >
+          </div>
+        </article>
+
+        <!-- Copyable examples -->
+        <article id="examples" class="panel" style="margin-top: 18px">
+          <h2 style="margin: 0 0 8px 0">Copyable Full Examples</h2>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px">
+            <div>
+              <strong>Simple Flex center:</strong>
+              <pre class="code">
+&lt;div class="wrap"&gt;
+  &lt;div class="box"&gt;Centered&lt;/div&gt;
+&lt;/div&gt;
+
+.wrap{ display:flex; justify-content:center; align-items:center; height:300px; background:#02182a; border-radius:8px; }
+.box{ padding:12px 18px; background:#075a7a; color:white; border-radius:6px; }</pre
+              >
+            </div>
+
+            <div>
+              <strong>Simple Grid gallery:</strong>
+              <pre class="code">
+&lt;div class="grid"&gt;
+  &lt;div&gt;1&lt;/div&gt; &lt;div&gt;2&lt;/div&gt; &lt;div&gt;3&lt;/div&gt;
+  &lt;div&gt;4&lt;/div&gt; &lt;div&gt;5&lt;/div&gt; &lt;div&gt;6&lt;/div&gt;
+&lt;/div&gt;
+
+.grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:10px; }
+.grid &gt; div{ padding:18px; background:#063544; color:#dff3ff; border-radius:8px; text-align:center; }</pre
+              >
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      // FLEX controls wiring
+      const fd = document.getElementById('fd'),
+        fw = document.getElementById('fw'),
+        jc = document.getElementById('jc'),
+        ai = document.getElementById('ai'),
+        ac = document.getElementById('ac'),
+        flexPreview = document.getElementById('flexPreview'),
+        flexCSS = document.getElementById('flexCSS'),
+        addItem = document.getElementById('addItem'),
+        rmItem = document.getElementById('rmItem'),
+        item2flex = document.getElementById('item2flex'),
+        item3as = document.getElementById('item3as'),
+        copyFlex = document.getElementById('copyFlex')
+
+      function updateFlex() {
+        flexPreview.style.flexDirection = fd.value
+        flexPreview.style.flexWrap = fw.value
+        flexPreview.style.justifyContent = jc.value
+        flexPreview.style.alignItems = ai.value
+        flexPreview.style.alignContent = ac.value
+
+        // update per-item
+        const f2 = document.getElementById('f2'),
+          f3 = document.getElementById('f3')
+        if (f2) f2.style.flex = item2flex.value
+        if (f3) f3.style.alignSelf = item3as.value
+
+        flexCSS.innerText = `/* container */\n.container{ display:flex; flex-direction:${fd.value}; flex-wrap:${fw.value}; justify-content:${jc.value}; align-items:${ai.value}; align-content:${ac.value}; }\n\n/* items */\n.item{ flex: 0 1 auto; }\n.item:nth-child(2){ flex: ${item2flex.value}; }\n.item:nth-child(3){ align-self: ${item3as.value}; }`
+      }
+      ;[fd, fw, jc, ai, ac, item2flex, item3as].forEach((el) =>
+        el.addEventListener('change', updateFlex)
+      )
+      ;[fd, fw, jc, ai, ac, item2flex, item3as].forEach((el) =>
+        el.addEventListener('input', updateFlex)
+      )
+
+      addItem.addEventListener('click', () => {
+        const el = document.createElement('div')
+        el.className = 'demo-box'
+        el.textContent = 'Item ' + (flexPreview.children.length + 1)
+        el.style.minWidth = '80px'
+        flexPreview.appendChild(el)
+        updateFlex()
+      })
+      rmItem.addEventListener('click', () => {
+        if (flexPreview.children.length > 0)
+          flexPreview.removeChild(flexPreview.lastElementChild)
+        updateFlex()
+      })
+
+      copyFlex.addEventListener('click', () => {
+        navigator.clipboard
+          .writeText(flexCSS.innerText)
+          .then(() => alert('Flex CSS copied to clipboard'))
+      })
+
+      // GRID controls wiring
+      const gtc = document.getElementById('gtc'),
+        gtr = document.getElementById('gtr'),
+        gap = document.getElementById('gap'),
+        gaf = document.getElementById('gaf'),
+        gridPreview = document.getElementById('gridPreview'),
+        gridCSS = document.getElementById('gridCSS'),
+        item2pos = document.getElementById('item2pos'),
+        copyGrid = document.getElementById('copyGrid')
+
+      function updateGrid() {
+        const cols = gtc.value || '1fr 1fr'
+        const rows = gtr.value || 'auto'
+        gridPreview.style.gridTemplateColumns = cols
+        gridPreview.style.gridTemplateRows = rows
+        gridPreview.style.gap = gap.value
+        gridPreview.style.gridAutoFlow = gaf.value
+
+        // place item 2 if a shorthand like "2 / 3" or "colStart / colEnd / rowStart / rowEnd"
+        const g2 = document.getElementById('g2')
+        if (g2) {
+          // safe parse: if two numbers -> interpret as grid-column
+          const v = item2pos.value.trim()
+          g2.style.gridColumn = ''
+          g2.style.gridRow = ''
+          g2.style.gridArea = ''
+          if (!v) {
+            // reset
+          } else {
+            // if includes 3 or 4 slash-separated values, set grid-area
+            const parts = v
+              .split('/')
+              .map((p) => p.trim())
+              .filter(Boolean)
+            if (parts.length === 2) {
+              g2.style.gridColumn = parts[0] + ' / ' + parts[1]
+            } else if (parts.length === 4) {
+              g2.style.gridArea = parts.join(' / ')
+            }
+          }
+        }
+
+        gridCSS.innerText = `.container{ display:grid; grid-template-columns: ${cols}; grid-template-rows: ${rows}; gap: ${gap.value}; grid-auto-flow: ${gaf.value}; }\n.item{ padding:10px; }`
+      }
+      ;[gtc, gtr, gap, gaf, item2pos].forEach((el) =>
+        el.addEventListener('input', updateGrid)
+      )
+      copyGrid.addEventListener('click', () => {
+        navigator.clipboard
+          .writeText(gridCSS.innerText)
+          .then(() => alert('Grid CSS copied to clipboard'))
+      })
+
+      // initialize
+      updateFlex()
+      updateGrid()
+
+      // convenience: handle anchor scroll smooth
+      document.querySelectorAll('nav.card a').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault()
+          const id = a.getAttribute('href').slice(1)
+          document
+            .getElementById(id)
+            .scrollIntoView({ behavior: 'smooth', block: 'start' })
+        })
+      })
+    </script>
+  </body>
+</html>
