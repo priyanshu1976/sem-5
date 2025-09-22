@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Borders - Comprehensive Guide</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Fira+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #2575fc;
+        --primary-dark: #1a4fa0;
+        --accent: #6a11cb;
+        --bg: #f5f7fa;
+        --container-bg: #fff;
+        --shadow: 0 6px 24px rgba(40, 60, 90, 0.1);
+        --radius: 16px;
+        --card-radius: 12px;
+        --card-shadow: 0 4px 18px rgba(40, 60, 90, 0.08);
+        --code-bg: #23272e;
+        --code-color: #e3e6eb;
+        --example-bg: #eaf1fb;
+        --example-border: #2575fc;
+        --demo-bg: #f8fafc;
+        --footer-bg: #23272e;
+        --footer-color: #bfc9d1;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: linear-gradient(120deg, var(--bg) 60%, #e3e9f3 100%);
+        color: #222b3a;
+        font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana,
+          sans-serif;
+        line-height: 1.7;
+        padding: 32px 0;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 48px;
+        padding: 36px 20px 28px 20px;
+        background: linear-gradient(
+          120deg,
+          var(--accent) 0%,
+          var(--primary) 100%
+        );
+        color: #fff;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      header::after {
+        content: '';
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 180px;
+        height: 180px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.12) 60%,
+          transparent 100%
+        );
+        z-index: 0;
+      }
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        position: relative;
+        z-index: 1;
+      }
+
+      header p {
+        font-size: 1.25rem;
+        opacity: 0.95;
+        position: relative;
+        z-index: 1;
+      }
+
+      h2 {
+        color: var(--primary-dark);
+        margin: 36px 0 18px;
+        padding-bottom: 12px;
+        border-bottom: 2.5px solid var(--primary);
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+
+      h3 {
+        color: var(--accent);
+        margin: 24px 0 12px;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+
+      p,
+      ul,
+      ol {
+        margin-bottom: 18px;
+        font-size: 1.08rem;
+      }
+
+      ul,
+      ol {
+        padding-left: 1.5em;
+      }
+
+      .container {
+        background: var(--container-bg);
+        border-radius: var(--radius);
+        padding: 38px 32px 32px 32px;
+        box-shadow: var(--shadow);
+        margin-bottom: 38px;
+        transition: box-shadow 0.2s;
+      }
+      .container:hover {
+        box-shadow: 0 10px 32px rgba(40, 60, 90, 0.13);
+      }
+
+      .example {
+        background: var(--example-bg);
+        border-left: 5px solid var(--example-border);
+        padding: 20px 22px;
+        margin: 28px 0;
+        border-radius: 0 var(--radius) var(--radius) 0;
+        box-shadow: 0 2px 8px rgba(37, 117, 252, 0.04);
+      }
+
+      .demo-box {
+        padding: 18px 20px;
+        margin: 18px 0;
+        background: var(--demo-bg);
+        border: 1.5px solid #dbeafe;
+        border-radius: 8px;
+        box-shadow: 0 1px 4px rgba(37, 117, 252, 0.04);
+      }
+
+      .border-demo {
+        padding: 18px 0;
+        margin: 18px 0;
+        text-align: center;
+        background: #f4f8fd;
+        border-radius: 7px;
+        font-size: 1.08rem;
+        font-weight: 500;
+        min-height: 48px;
+        transition: box-shadow 0.2s;
+      }
+
+      .border-demo:hover {
+        box-shadow: 0 2px 12px rgba(37, 117, 252, 0.1);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 28px;
+        margin: 28px 0;
+      }
+
+      .card {
+        background: var(--container-bg);
+        border-radius: var(--card-radius);
+        padding: 24px 20px 20px 20px;
+        box-shadow: var(--card-shadow);
+        transition: transform 0.3s cubic-bezier(0.4, 2, 0.6, 1), box-shadow 0.2s;
+        border: 1.5px solid #e3e9f3;
+        position: relative;
+      }
+
+      .card:hover {
+        transform: translateY(-7px) scale(1.025);
+        box-shadow: 0 8px 32px rgba(37, 117, 252, 0.13);
+        border-color: var(--primary);
+      }
+
+      .color-box {
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+        margin-right: 7px;
+        border: 1.5px solid #dbeafe;
+        border-radius: 4px;
+        vertical-align: middle;
+        box-shadow: 0 1px 2px rgba(37, 117, 252, 0.04);
+      }
+
+      .blue {
+        background-color: #2575fc;
+      }
+      .red {
+        background-color: #e74c3c;
+      }
+      .green {
+        background-color: #27ae60;
+      }
+      .custom {
+        background-color: rgb(100, 123, 111);
+      }
+      .custom-alpha {
+        background-color: rgba(50, 123, 111, 0.4);
+      }
+
+      .radius-demo {
+        width: 180px;
+        height: 180px;
+        margin: 18px auto;
+        background: linear-gradient(135deg, #f6f6f6 60%, #e3e9f3 100%);
+        border: 5px solid var(--primary-dark);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.08rem;
+        font-weight: 500;
+        color: var(--primary-dark);
+        box-shadow: 0 2px 12px rgba(37, 117, 252, 0.07);
+      }
+
+      code {
+        background: var(--code-bg);
+        color: var(--code-color);
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-family: 'Fira Mono', 'Courier New', monospace;
+        font-size: 1em;
+      }
+
+      pre {
+        background: var(--code-bg);
+        color: var(--code-color);
+        padding: 18px 16px;
+        border-radius: 7px;
+        overflow-x: auto;
+        margin: 18px 0;
+        font-size: 1.02em;
+        font-family: 'Fira Mono', 'Courier New', monospace;
+        box-shadow: 0 1px 6px rgba(37, 117, 252, 0.06);
+      }
+
+      pre code {
+        background: none;
+        color: inherit;
+        padding: 0;
+        border-radius: 0;
+        font-size: inherit;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 48px;
+        padding: 28px 10px 18px 10px;
+        background: var(--footer-bg);
+        color: var(--footer-color);
+        font-size: 1.05rem;
+        border-radius: var(--radius);
+        box-shadow: 0 2px 12px rgba(37, 117, 252, 0.07);
+      }
+
+      /* Add subtle section transitions */
+      .container:not(:first-child) {
+        animation: fadeInUp 0.7s cubic-bezier(0.4, 2, 0.6, 1);
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* Responsive improvements */
+      @media (max-width: 900px) {
+        body {
+          padding: 12px 0;
+        }
+        .container {
+          padding: 24px 8px 18px 8px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+        .radius-demo {
+          width: 100%;
+          max-width: 260px;
+          height: 120px;
+        }
+      }
+      @media (max-width: 600px) {
+        header {
+          padding: 24px 8px 16px 8px;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        h2 {
+          font-size: 1.3rem;
+        }
+        .container {
+          padding: 14px 2vw 10px 2vw;
+        }
+        .radius-demo {
+          max-width: 100%;
+          height: 80px;
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>CSS Borders</h1>
+      <p>Complete guide to styling borders with CSS</p>
+    </header>
+
+    <div class="container">
+      <h2>Introduction to CSS Borders</h2>
+      <p>
+        The <code>border</code> property is used to create a border around an
+        element, such as a div, image, or text. It allows you to customize the
+        appearance of the border, including its color, width, and style.
+      </p>
+
+      <div class="example">
+        <h3>Types of Border Properties</h3>
+        <ul>
+          <li>
+            <strong>border-style</strong>: Specifies whether a border should be
+            solid, dashed line, double line, or one of the other possible values
+          </li>
+          <li>
+            <strong>border-width</strong>: Specifies the width of a border
+          </li>
+          <li>
+            <strong>border-color</strong>: Specifies the color of a border
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Border Style Property</h2>
+      <p>
+        The <code>border-style</code> property is used to specify the type of
+        border style for an element.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>None</h3>
+          <div class="border-demo" style="border-style: none">No border.</div>
+          <pre><code>border-style: none;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Hidden</h3>
+          <div class="border-demo" style="border-style: hidden">
+            Hidden border.
+          </div>
+          <pre><code>border-style: hidden;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Dotted</h3>
+          <div class="border-demo" style="border-style: dotted">
+            Dotted border.
+          </div>
+          <pre><code>border-style: dotted;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Dashed</h3>
+          <div class="border-demo" style="border-style: dashed">
+            Dashed border.
+          </div>
+          <pre><code>border-style: dashed;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Solid</h3>
+          <div class="border-demo" style="border-style: solid">
+            Solid border.
+          </div>
+          <pre><code>border-style: solid;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Double</h3>
+          <div class="border-demo" style="border-style: double">
+            Double border.
+          </div>
+          <pre><code>border-style: double;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Groove</h3>
+          <div class="border-demo" style="border-style: groove">
+            Groove border.
+          </div>
+          <pre><code>border-style: groove;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Ridge</h3>
+          <div class="border-demo" style="border-style: ridge">
+            Ridge border.
+          </div>
+          <pre><code>border-style: ridge;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Inset</h3>
+          <div class="border-demo" style="border-style: inset">
+            Inset border.
+          </div>
+          <pre><code>border-style: inset;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Outset</h3>
+          <div class="border-demo" style="border-style: outset">
+            Outset border.
+          </div>
+          <pre><code>border-style: outset;</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Border Style For Individual Sides</h2>
+      <p>
+        The <code>border-style</code> property can be specified for each side
+        individually.
+      </p>
+
+      <div class="example">
+        <h3>Example Code</h3>
+        <pre><code>p {
+    border-top-style: dotted;
+    border-right-style: solid;
+    border-bottom-style: dashed;
+    border-left-style: double;
+    padding: 2em;
+    width: 150px;
+}</code></pre>
+      </div>
+
+      <div class="demo-box">
+        <h3>Result:</h3>
+        <div
+          style="
+            border-top-style: dotted;
+            border-right-style: solid;
+            border-bottom-style: dashed;
+            border-left-style: double;
+            padding: 2em;
+            width: 150px;
+            margin: 0 auto;
+            background: #f4f8fd;
+            border-width: 3px;
+          "
+        >
+          Different border styles on all sides.
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Border Width Property</h2>
+      <p>
+        The <code>border-width</code> property is used to specify the thickness
+        of a border around an element. It can have values like
+        <code>thin</code>, <code>medium</code>, <code>thick</code> or any length
+        (in <code>px</code>, or <code>em</code>).
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Thin</h3>
+          <div
+            class="border-demo"
+            style="border-style: solid; border-width: thin"
+          >
+            Thin width.
+          </div>
+          <pre><code>border-width: thin;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Medium</h3>
+          <div
+            class="border-demo"
+            style="border-style: solid; border-width: medium"
+          >
+            Medium width.
+          </div>
+          <pre><code>border-width: medium;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Thick</h3>
+          <div
+            class="border-demo"
+            style="border-style: solid; border-width: thick"
+          >
+            Thick width.
+          </div>
+          <pre><code>border-width: thick;</code></pre>
+        </div>
+
+        <div class="card">
+          <h3>Specific Value (10px)</h3>
+          <div
+            class="border-demo"
+            style="border-style: solid; border-width: 10px"
+          >
+            Border width: 10px.
+          </div>
+          <pre><code>border-width: 10px;</code></pre>
+        </div>
+      </div>
+
+      <div class="example">
+        <h3>Different Widths on Each Side</h3>
+        <pre><code>p {
+    border-style: solid;
+    border-top-width: thin;
+    border-right-width: thick;
+    border-bottom-width: medium;
+    border-left-width: 10px;
+}</code></pre>
+
+        <div class="demo-box">
+          <div
+            style="
+              border-style: solid;
+              border-top-width: thin;
+              border-right-width: thick;
+              border-bottom-width: medium;
+              border-left-width: 10px;
+              padding: 15px;
+              background: #f4f8fd;
+            "
+          >
+            Different border widths on all sides.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Border Color Property</h2>
+      <p>
+        The <code>border-color</code> property is used to set the color of a
+        border.
+      </p>
+
+      <div class="example">
+        <h3>Single Color</h3>
+        <pre><code>p {
+    border-style: solid;
+    border-color: blue;
+}</code></pre>
+
+        <div class="demo-box">
+          <div
+            style="
+              border-style: solid;
+              border-color: #2575fc;
+              padding: 15px;
+              background: #f4f8fd;
+            "
+          >
+            Border color blue.
+          </div>
+        </div>
+      </div>
+
+      <div class="example">
+        <h3>Different Colors on Each Side</h3>
+        <pre><code>p {
+    border-style: solid;
+    border-top-color: red;
+    border-right-color: #0000ff;
+    border-bottom-color: rgb(100,123,111);
+    border-left-color: rgba(50,123,111,0.4);
+}</code></pre>
+
+        <div class="demo-box">
+          <div
+            style="
+              border-style: solid;
+              border-top-color: #e74c3c;
+              border-right-color: #2575fc;
+              border-bottom-color: rgb(100, 123, 111);
+              border-left-color: rgba(50, 123, 111, 0.4);
+              padding: 15px;
+              background: #f4f8fd;
+            "
+          >
+            Different border color on all sides.
+            <br />
+            <span class="color-box blue"></span> Blue
+            <span class="color-box red"></span> Red
+            <span class="color-box custom"></span> RGB(100,123,111)
+            <span class="color-box custom-alpha"></span> RGBA(50,123,111,0.4)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Border Shorthand Property</h2>
+      <p>
+        In CSS, we can use the <code>border</code> property to specify style,
+        width and color of a border in one line.
+      </p>
+
+      <div class="example">
+        <h3>Syntax</h3>
+        <pre><code>h2 {
+    border: 4px dotted green;
+}</code></pre>
+
+        <p>
+          The above code will add a green, dotted and 4px thick border on all
+          the four sides of the <code>h2</code> element.
+        </p>
+
+        <div class="demo-box">
+          <h3
+            style="
+              border: 4px dotted #27ae60;
+              padding: 10px;
+              text-align: center;
+              background: #f4f8fd;
+            "
+          >
+            Example Heading with Border Shorthand
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Border Radius Property</h2>
+      <p>
+        The CSS <code>border-radius</code> property is used to specify the
+        roundness of border edges. The value for this property can be in length
+        (<code>px</code>, <code>em</code>) or percentages. A border radius of
+        <code>50%</code> indicates a complete circle.
+      </p>
+
+      <div class="example">
+        <h3>Example Code</h3>
+        <pre><code>#round {
+    border-radius: 25px;
+}
+
+#circle {
+    border-radius: 50%;
+}</code></pre>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Rounded Corners (25px)</h3>
+          <div class="radius-demo" style="border-radius: 25px">
+            border-radius: 25px;
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Circle (50%)</h3>
+          <div class="radius-demo" style="border-radius: 50%">
+            border-radius: 50%;
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>CSS Image As Border</h2>
+      <p>
+        CSS also allows you to set images as borders for elements like
+        <code>div</code>, <code>span</code>, <code>body</code>,
+        <code>p</code> etc. using the <code>border-image</code> property.
+        Declare the <code>border-style</code> before providing an image source,
+        else no image will be displayed as the border.
+      </p>
+
+      <div class="example">
+        <h3>Example Code</h3>
+        <pre><code>div {
+    background-color: #ffffff;
+    border: 20px solid;
+    border-image: url(images.jpg) 40;
+    padding: 20px;
+}</code></pre>
+
+        <div class="demo-box">
+          <p
+            style="
+              border: 20px solid;
+              border-image: repeating-linear-gradient(45deg, #4f9, #96c 10%) 40;
+              padding: 20px;
+              background: #f4f8fd;
+            "
+          >
+            This is an example of setting a border image using CSS (simulated
+            with gradient)
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        Created as a comprehensive guide to CSS Borders. All concepts covered
+        with practical examples.
+      </p>
+      <p>Based on provided slides and extended with additional information.</p>
+    </footer>
+  </body>
+</html>
