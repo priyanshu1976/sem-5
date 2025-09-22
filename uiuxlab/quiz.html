@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML <a> Tag & Table Examples</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 8px;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>HTML &lt;a href&gt; Tag Examples</h1>
+
+    <h2>1. Basic Link</h2>
+    <a href="https://www.example.com">Visit Example</a>
+
+    <h2>2. Open in a New Tab</h2>
+    <a href="https://www.example.com" target="_blank"
+      >Open Example in New Tab</a
+    >
+
+    <h2>3. Open in the Same Frame (Default)</h2>
+    <a href="https://www.example.com" target="_self">Open in Same Tab</a>
+
+    <h2>4. Open in Parent Frame</h2>
+    <a href="https://www.example.com" target="_parent">Open in Parent Frame</a>
+
+    <h2>5. Open in Full Body of Window</h2>
+    <a href="https://www.example.com" target="_top">Open in Full Body</a>
+
+    <h2>6. Link to a Section on the Same Page</h2>
+    <a href="#about">Go to About Section</a>
+    <div style="margin-top: 50vh"></div>
+    <h3 id="about">About Section</h3>
+    <p>This is the about section of the page.</p>
+
+    <h2>7. Link to an Email Address</h2>
+    <a href="mailto:support@example.com">Email Us</a>
+
+    <h2>8. Link to a Phone Number</h2>
+    <a href="tel:+911234567890">Call Us</a>
+
+    <h2>9. Download a File</h2>
+    <a href="/files/sample.pdf" download>Download PDF</a>
+
+    <h2>10. Link with Title Attribute (Tooltip)</h2>
+    <a href="https://www.example.com" title="Go to Example Website"
+      >Hover over me</a
+    >
+
+    <h2>11. Link that Runs JavaScript</h2>
+    <a href="javascript:alert('Hello!')">Click Me</a>
+
+    <h2>12. Image as a Link</h2>
+    <a href="https://www.example.com">
+      <img src="https://via.placeholder.com/150" alt="Example Logo" />
+    </a>
+
+    <h1>HTML Table Example</h1>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>City</th>
+      </tr>
+      <tr>
+        <td>Priyanshu</td>
+        <td>20</td>
+        <td>New Delhi</td>
+      </tr>
+      <tr>
+        <td>Bhumika</td>
+        <!-- <td>19</td> -->
+        <td>Chandigarh</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>21</td>
+        <!-- <td>Mumbai</td> -->
+      </tr>
+    </table>
+  </body>
+</html>

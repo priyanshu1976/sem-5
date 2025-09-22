@@ -1,0 +1,71 @@
+<!--
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                        🌟 ATTRIBUTE SELECTORS IN CSS 🌟                    ║
+║                                                                            ║
+║  Attribute selectors let you style elements based on their attributes       ║
+║  (like type, href, alt, src, etc). This is super useful for targeting      ║
+║  elements without adding extra classes or IDs, keeping your CSS clean,     ║
+║  organized, and scalable!                                                  ║
+║                                                                            ║
+║  ──────────────── TYPES OF ATTRIBUTE SELECTORS ────────────────            ║
+║                                                                            ║
+║  1. [attr]    → Has Attribute                                              ║
+║     Selects elements that have a specific attribute (any value).           ║
+║     Example:                                                               ║
+║         [input] { border: 2px solid blue; }                                ║
+║     ✅ Styles all <input> elements (any type).                             ║
+║                                                                            ║
+║  2. [attr=value]    → Exact Match                                          ║
+║     Selects elements where attribute value matches exactly.                ║
+║     Example:                                                               ║
+║         input[type="text"] { background-color: lightyellow; }              ║
+║     ✅ Only <input type="text"> gets yellow background.                    ║
+║     ❌ <input type="password"> not affected.                               ║
+║                                                                            ║
+║  3. [attr~=value]    → Contains Word                                       ║
+║     Selects elements whose attribute value is a space-separated list       ║
+║     of words, and one matches exactly.                                     ║
+║     Example:                                                               ║
+║         div[class~="featured"] { border: 2px solid green; }                ║
+║     ✅ <div class="featured card"> is selected                             ║
+║     ✅ <div class="highlight featured big"> is selected                    ║
+║     ❌ <div class="featuredbox"> is NOT selected                           ║
+║                                                                            ║
+║  4. [attr^=value]    → Starts With                                         ║
+║     Selects elements whose attribute value starts with given value.        ║
+║     Example:                                                               ║
+║         a[href^="https"] { color: green; }                                 ║
+║     ✅ <a href="https://..."> is green                                     ║
+║     ❌ <a href="http://..."> is not selected                               ║
+║                                                                            ║
+║  5. [attr$=value]    → Ends With                                           ║
+║     Selects elements whose attribute value ends with given value.          ║
+║     Example:                                                               ║
+║         img[src$=".png"] { border: 2px solid red; }                        ║
+║     ✅ <img src="logo.png"> has red border                                 ║
+║     ❌ <img src="logo.jpg"> not affected                                   ║
+║                                                                            ║
+║  6. [attr*=value]    → Contains Anywhere                                   ║
+║     Selects elements whose attribute value contains value anywhere.        ║
+║     Example:                                                               ║
+║         a[href*="google"] { color: blue; }                                 ║
+║     ✅ <a href="https://www.google.com/"> is blue                          ║
+║     ✅ <a href="https://mail.google.co.in"> is blue                        ║
+║     ❌ <a href="https://yahoo.com"> not affected                           ║
+║                                                                            ║
+║  7. Case-Insensitive Matching (i or I)                                     ║
+║     Add 'i' to make the match case-insensitive.                            ║
+║     Example:                                                               ║
+║         a[href="EXAMPLE" i] { color: purple; }                             ║
+║     ✅ Matches <a href="example">, <a href="EXAMPLE">, <a href="ExAmPlE">  ║
+║                                                                            ║
+║  8. Case-Sensitive Matching (s or S)                                       ║
+║     Add 's' to force case-sensitive match (default in most browsers).      ║
+║     Example:                                                               ║
+║         a[href="Example" s] { color: red; }                                ║
+║     ✅ Only matches <a href="Example">                                      ║
+║     ❌ Won’t match <a href="example"> or <a href="EXAMPLE">                ║
+║                                                                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+-->

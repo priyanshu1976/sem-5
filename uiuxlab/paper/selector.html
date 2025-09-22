@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Selectors Demo</title>
+    <style>
+      /**********************************************************
+       *  1. Universal Selector - Selects EVERYTHING            *
+       **********************************************************/
+      * {
+        font-family: Arial, sans-serif;
+      }
+
+      /**********************************************************
+       *  2. Type Selector - Selects elements by tag name       *
+       **********************************************************/
+      h1 {
+        color: darkblue;
+      }
+
+      /**********************************************************
+       *  3. Class Selector - Selects elements with a class     *
+       **********************************************************/
+      .highlight {
+        background-color: yellow;
+      }
+
+      /**********************************************************
+       *  4. ID Selector - Selects element with a specific ID   *
+       **********************************************************/
+      #special {
+        color: green;
+        font-weight: bold;
+      }
+
+      /**********************************************************
+       !  5. Descendant Selector - Any element inside another   !
+       !  (red)                                                !
+       **********************************************************/
+      .container p {
+        color: red;
+      }
+
+      /**********************************************************
+       *  6. Child Selector - Only DIRECT children              *
+       **********************************************************/
+      .container > span {
+        color: purple;
+        font-weight: bold;
+      }
+
+      /**********************************************************
+       !  7. Adjacent Sibling Selector - Selects the NEXT elem  !
+       !  (red)                                                !
+       **********************************************************/
+      h2 + p {
+        font-style: italic;
+        color: brown;
+      }
+
+      /**********************************************************
+       !  8. General Sibling Selector - Selects ALL next sibs   !
+       !  (red)                                                !
+       **********************************************************/
+      h3 ~ p {
+        text-decoration: underline;
+      }
+
+      /**********************************************************
+       *  9. Attribute Selector - Selects elements w/ attribute *
+       **********************************************************/
+      input[type='text'] {
+        border: 2px solid blue;
+        padding: 5px;
+      }
+
+      /**********************************************************
+       * 10. Pseudo-class Selector - Example: hover             *
+       **********************************************************/
+      button:hover {
+        background-color: orange;
+        color: white;
+        cursor: pointer;
+      }
+
+      /**********************************************************
+       * 11. Pseudo-element Selector - Example: first-letter    *
+       **********************************************************/
+      p::first-letter {
+        /*
+        used for part of the element
+        first-line
+        first - letter
+        before
+        after marker
+        selection
+        */
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+      #active:active {
+        background-color: blue;
+        /* when we press on it or some activity is going on */
+        /* e
+        hover
+        active
+        focus
+        visited
+         */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- **********************************************************
+         *  CSS Selectors Playground (h1 - type selector)          *
+         ********************************************************** -->
+    <h1>CSS Selectors Playground</h1>
+
+    <!-- **********************************************************
+         *  Class Selector Example                                 *
+         ********************************************************** -->
+    <p class="highlight">
+      This paragraph is styled using a <b>class selector</b>.
+    </p>
+    <!-- **********************************************************
+         *  ID Selector Example                                    *
+         ********************************************************** -->
+    <p id="special">This paragraph is styled using an <b>ID selector</b>.</p>
+
+    <!-- **********************************************************
+         !  Descendant & Child Selector Example (red, green)       !
+         ********************************************************** -->
+    <div class="container">
+      <p>This paragraph is styled using a <b>descendant selector</b>.</p>
+      <div>
+        <p>
+          This nested paragraph is also affected by the descendant selector.
+        </p>
+      </div>
+      <span>I am a direct child, styled using a <b>child selector</b>.</span>
+      <div>
+        <span> Lorem ipsum dolor sit. </span>
+      </div>
+    </div>
+
+    <!-- **********************************************************
+         !  Sibling Selectors Example (red for adjacent/general)   !
+         ********************************************************** -->
+    <h2>Sibling Selectors</h2>
+    <p>
+      This paragraph is selected by <b>adjacent sibling selector</b> (h2 + p).
+    </p>
+    <p>This one is NOT adjacent sibling, so no special style.</p>
+
+    <h3>General Sibling Example</h3>
+    <p>This paragraph and all following siblings get underlined by (h3 ~ p).</p>
+    <p>Yes, me too!</p>
+
+    <!-- **********************************************************
+         *  Attribute Selector Example                             *
+         ********************************************************** -->
+    <input type="text" placeholder="Styled by attribute selector" />
+    <input type="password" placeholder="Not styled" />
+
+    <br /><br />
+    <!-- **********************************************************
+         *  Pseudo-class Selector Example (hover)                  *
+         ********************************************************** -->
+    <button>Hover over me!</button>
+    <button id="active">click over me!</button>
+  </body>
+</html>
