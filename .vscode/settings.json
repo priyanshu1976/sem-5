@@ -10,6 +10,7 @@
     ".babelrc": "json",
     ".huskyrc": "json",
     ".env*": "dotenv",
-    "vector": "cpp"
+    "vector": "cpp",
+    "iostream": "cpp"
   }
 }
